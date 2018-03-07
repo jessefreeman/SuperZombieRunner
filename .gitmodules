@@ -1,0 +1,3 @@
+[submodule "Assets/UTools"]
+	path = Assets/UTools
+	url = git@github.com:jessefreeman/UTools.git
