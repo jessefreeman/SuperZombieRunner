@@ -1,0 +1,35 @@
+{
+    "Time": {
+        "text": "TIME"
+    },
+    "Best":{
+        "text": "BEST"
+    },
+    "Score":{
+        "test": "SCORE"
+    },
+    "Start":
+    { 
+        "text": "PRESS ${key} TO START"
+    },
+    "Restart":
+    { 
+        "text": "PRESS ${key} TO RESTART"
+    },
+    "Instructions":
+    { 
+        "text": "RUN AS FAST AS YOUR LITTLE LEGS WILL TAKE YOU!"
+    },
+    "Combo":
+    {
+        
+    },
+    "Keys":{
+        "keyboard": "SPACEBAR",
+        "touch": "ANYWHERE",
+        "controller": "SELECT OR A BUTTON"
+    },
+    "Sound":{
+        "text":"SOUND ${on}/${off}"
+    }
+}

@@ -1,0 +1,20 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# Sprite sheet: zombie-f-sprite-sheet.png (128 x 256)
+# $TexturePacker:SmartUpdate:d206bf36f9cad73d11269316669cdde3:53cc4373f0e78a889ee4b9dc56069762:7553eba16f55612f0000e0161d9ceb98$
+#
+
+zombie-f-0-00;2;220;34;34;0.5;0.5
+zombie-f-0-01;38;220;34;34;0.5;0.5
+zombie-f-0-02;74;220;34;34;0.5;0.5
+zombie-f-0-03;2;184;34;34;0.5;0.5
+zombie-f-0-04;38;184;34;34;0.5;0.5
+zombie-f-0-05;74;184;34;34;0.5;0.5
+zombie-f-0-06;2;148;34;34;0.5;0.5
+zombie-f-0-07;38;148;34;34;0.5;0.5
+zombie-f-0-08;74;148;34;34;0.5;0.5
+zombie-f-0-09;2;112;34;34;0.5;0.5

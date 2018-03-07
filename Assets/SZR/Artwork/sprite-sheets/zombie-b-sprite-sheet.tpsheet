@@ -1,0 +1,17 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# Sprite sheet: zombie-b-sprite-sheet.png (128 x 128)
+# $TexturePacker:SmartUpdate:c75f6a06a7189631ce48a0775b132648:6ddf5fb2f51435f25bb690bdc5dfe4af:01797be6a694a70771769788db6f9b48$
+#
+
+zombie-b-0-00;2;92;34;34;0.5;0.5
+zombie-b-0-01;38;92;34;34;0.5;0.5
+zombie-b-0-02;74;92;34;34;0.5;0.5
+zombie-b-0-03;2;56;34;34;0.5;0.5
+zombie-b-0-04;38;56;34;34;0.5;0.5
+zombie-b-0-05;74;56;34;34;0.5;0.5
+zombie-b-0-06;2;20;34;34;0.5;0.5

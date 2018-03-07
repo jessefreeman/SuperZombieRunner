@@ -1,0 +1,19 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# Sprite sheet: girl-sprite-sheet.png (128 x 128)
+# $TexturePacker:SmartUpdate:c8179aab14c41519454dae3531802add:fd4ac40038da4450d1bd63641f1cea81:bf38a3b1a602203f4215778a51adde87$
+#
+
+person-idle-0;2;92;34;34;0.5;0.5
+person-idle-1;38;92;34;34;0.5;0.5
+person-running-0-00-1;74;92;34;34;0.5;0.5
+person-running-0-01-1;2;56;34;34;0.5;0.5
+person-running-0-02-1;38;56;34;34;0.5;0.5
+person-running-0-03-1;74;56;34;34;0.5;0.5
+person-running-0-04-1;2;20;34;34;0.5;0.5
+person-running-0-05-1;38;20;34;34;0.5;0.5
+person-running-0-06-1;74;20;34;34;0.5;0.5
