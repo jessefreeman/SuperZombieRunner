@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
     private int scoreBuffer;
     public Text scoreText;
     private SoundManager soundManager;
-
+    
     private float timeElapsed;
     private TimeManager timeManager;
     public Text timeText;
@@ -121,8 +121,8 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            var keyStrings = textManager.data.GetObject("Keys");
-            var buttonText = keyStrings.GetString(actionButtonType);
+            var buttonText = textManager.GetText(actionButtonType);//data.GetObject("Keys"));
+//            var buttonText = keyStrings.GetString(actionButtonType);
             return buttonText;
         }
     }
@@ -221,17 +221,22 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!gameStarted && !gameOverLock)
-            if (Input.anyKeyDown)
-                if (!Input.GetKeyDown(KeyCode.Escape))
-                {
-                    timeManager.ManipulateTime(1, 1f);
-                    soundManager.PlayClip((int) Sounds.StartGame);
-
-                    ResetGame();
-                }
+//        if (!gameStarted && !gameOverLock)
+//            if (Input.anyKeyDown)
+//                if (!Input.GetKeyDown(KeyCode.Escape))
+//                {
+//                    timeManager.ManipulateTime(1, 1f);
+//                    soundManager.PlayClip((int) Sounds.StartGame);
+//
+//                    ResetGame();
+//                }
 
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // Only toggle the pause menu when time is stopped or at full speed, not during a transition.
+            if (Time.timeScale % 1 != 0)
+                return;
+            
             if (gameStarted)
             {
                 if (quitPanel.activeSelf)
@@ -247,6 +252,9 @@ public class GameManager : MonoBehaviour
                     Quit();
             }
 
+        }
+            
+
         if (!gameStarted)
         {
             blinkTime++;
@@ -261,8 +269,8 @@ public class GameManager : MonoBehaviour
 
             timeText.text = "TIME: " + FormatTime(timeElapsed) + "\n<color=" + textColor + ">BEST: " +
                             FormatTime(bestTime) + "</color>";
-            scoreText.text = "SCORE: " + scoreManager.GetScore().ToString("D6") + "\n<color=" + textColor2 + ">BEST: " +
-                             bestScore.ToString("D6") + "</color>";
+            scoreText.text = "SCORE: " + scoreManager.GetScore().ToString("D5") + "\n<color=" + textColor2 + ">BEST: " +
+                             bestScore.ToString("D5") + "</color>";
         }
         else
         {
@@ -270,7 +278,7 @@ public class GameManager : MonoBehaviour
             timeText.text = "TIME: " + FormatTime(timeElapsed);
 
             scoreBuffer = (int) GetValue(scoreBuffer, scoreManager.GetScore(), 2);
-            scoreText.text = "SCORE: " + scoreBuffer.ToString("D6");
+            scoreText.text = "SCORE: " + scoreBuffer.ToString("D5");
             var combo = (int) statsManager.GetStatValue("JumpCombo") - 1;
 
             if (combo > 1)
@@ -315,7 +323,7 @@ public class GameManager : MonoBehaviour
         achievementMessageBox.Reset();
         achievementMessageBox.ToggleDisplay(false);
 
-        UpdateContinueText("Restart");
+        UpdateContinueText("restart");
 
         gameOverLock = true;
         StartCoroutine(ResetGameOverLock(gameOverLockDelay));
@@ -364,7 +372,7 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(NextTask());
 
-        messageBox.ShowMessage(textManager.GetText("Instructions"), 4);
+        messageBox.ShowMessage(textManager.GetText("instructions"), 4);
 
         pauseButton.gameObject.SetActive(true);
 
@@ -381,6 +389,10 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
+
+        if (Time.timeScale == 0)
+            return;
+        
         if (quitPanel != null)
         {
             previousSelected = EventSystem.current.currentSelectedGameObject;
@@ -390,7 +402,7 @@ public class GameManager : MonoBehaviour
             {
                 gameOverLock = true;
                 lastTimeScale = Time.timeScale;
-                Time.timeScale = 0;
+//                Time.timeScale = 0;
             }
         }
     }
@@ -421,7 +433,9 @@ public class GameManager : MonoBehaviour
 
     public void TogglePause()
     {
-        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+        var timeScale = Time.timeScale;
+        
+        Time.timeScale = timeScale == 0 ? 1 : 0;
         if (pauseButton != null)
             pauseButton.UpdateButtonSprite();
 
@@ -454,5 +468,28 @@ public class GameManager : MonoBehaviour
         else
             bufferValue = value;
         return bufferValue;
+    }
+
+    public void PlayeAction()
+    {
+        // Test to see if the game is over
+        if (!gameStarted && !gameOverLock)
+        {
+            timeManager.ManipulateTime(1, 1f);
+            soundManager.PlayClip((int) Sounds.StartGame);
+
+            ResetGame();
+        }
+        // If game is playing see if we can make the player jump
+        else
+        {
+            // Look for a player instance
+            if (player != null)
+            {
+                // Call action on the player's jump component
+                player.GetComponent<Jump>().Action();
+            }
+        }
+
     }
 }

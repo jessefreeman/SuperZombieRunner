@@ -14,61 +14,67 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
-using Boomlagoon.JSON;
+//using Boomlagoon.JSON;
 using UnityEngine;
 using UnityEngine.UI;
-#if UNITY_EDITOR
-#endif
+//#if UNITY_EDITOR
+//#endif
 
 public class TextManager : MonoBehaviour
 {
-    public JSONObject data;
-
-    public void ParseJSON(string json)
-    {
-        data = JSONObject.Parse(json);
-    }
-
+    // Create new game object to store game text
+    private GameText gameText = new GameText();
+  
     public string GetText(string key, Dictionary<string, string> tokens = null)
     {
-        if (data == null)
-            return "";
 
-        var obj = data.GetObject(key);
-        var text = obj.GetString("text");
+        var field = GetField (key);
 
+        if (field == null)
+            return "Undefined";
+
+        var text = field.GetValue(gameText) as string;
+        
         if (tokens != null)
             text = ReplaceTokens(text, tokens);
 
         return text;
     }
 
-    public void SetText(string key, Text target, Dictionary<string, string> tokens = null)
+    public void ParseJSON(string jsonText)
     {
-        target.text = GetText(key, tokens);
+        // TODO Try to deserialize json on gameText object using Unity's built in json parser
     }
 
-    public void SetText(Text target)
-    {
-        SetText(target.name, target);
+    
+    FieldInfo[] fields{
+        get{
+
+            if (_fields == null) {
+                var type = typeof(GameText);
+                _fields = type.GetFields (BindingFlags.Public | BindingFlags.Instance);
+            }
+
+            return _fields;
+        }
     }
 
-    public void SetText(Text[] targets)
-    {
-        foreach (var instance in targets) SetText(instance.gameObject.name, instance);
+    FieldInfo[] _fields;
+
+    private FieldInfo GetField(string name){
+        return fields.FirstOrDefault (f => f.Name == name);
     }
 
-    public string[] GetStringArray(string key)
-    {
-        var list = data.GetArray(key);
-        var names = new string[list.Length];
-        for (var i = 0; i < list.Length; i++) names[i] = list[i].Str;
-
-        return names;
+    public void SetTextByKey(string name, string value){
+        var field = GetField (name);
+        field.SetValue (this, value);
     }
-
+    
     public string ReplaceTokens(string defaultText, Dictionary<string, string> tokenValuePairs)
     {
         var sb = new StringBuilder(defaultText);

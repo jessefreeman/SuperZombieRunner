@@ -46,8 +46,9 @@ public class InputState : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!Input.GetKeyDown(KeyCode.Escape))
-            actionButton = Input.anyKey; // && !);//characterActions.Jump.WasPressed;
+        actionButton = false;
+//        if (!Input.GetKeyDown(KeyCode.Escape))
+//            actionButton = Input.anyKey; // && !);//characterActions.Jump.WasPressed;
     }
 
     private void FixedUpdate()

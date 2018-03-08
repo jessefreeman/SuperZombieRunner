@@ -51,8 +51,8 @@ public class StartText : MonoBehaviour
     {
         get
         {
-            var keyStrings = textManager.data.GetObject("Keys");
-            var buttonText = keyStrings.GetString(actionButtonType);
+            var buttonText = textManager.GetText(actionButtonType);//data.GetObject("Keys"));
+//            var buttonText = keyStrings.GetString(actionButtonType);
             return buttonText;
         }
     }
@@ -66,7 +66,7 @@ public class StartText : MonoBehaviour
         var token = new Dictionary<string, string>();
         token.Add("${key}", deviceKeyString);
 
-        text.text = textManager.GetText("Start", token);
+        text.text = textManager.GetText("start", token);
     }
 
     // Update is called once per frame

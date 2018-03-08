@@ -57,15 +57,21 @@ public class Jump : MonoBehaviour
         {
             if (inputState.actionButton)
             {
-                body2d.velocity = new Vector2(transform.position.x < 0 ? forwardSpeed : 0, jumpSpeed);
-                GameObjectUtil.GetSingleton<SoundManager>().PlayClip((int) Sounds.Jump);
+                Action();
             }
-
-            //Debug.Log("Not Jumping "+inputState.running);
         }
         else
         {
             wasJumping = true;
+        }
+    }
+
+    public void Action()
+    {
+        if (inputState.standing)
+        {
+            body2d.velocity = new Vector2(transform.position.x < 0 ? forwardSpeed : 0, jumpSpeed);
+            GameObjectUtil.GetSingleton<SoundManager>().PlayClip((int) Sounds.Jump);
         }
     }
 }

@@ -28,8 +28,4 @@ public class SplashScreenManager : MonoBehaviour
         textManager.ParseJSON(jsonData.ToString());
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-    }
 }
