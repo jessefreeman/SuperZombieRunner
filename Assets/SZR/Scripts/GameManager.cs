@@ -263,14 +263,7 @@ public class GameManager : MonoBehaviour
 
             if (!gameOverLock)
                 continueText.canvasRenderer.SetAlpha(blink ? 0 : 1);
-
-            var textColor = beatBestTime ? "#FF0" : "#FFF";
-            var textColor2 = beatBestScore ? "#FF0" : "#FFF";
-
-            timeText.text = "TIME: " + FormatTime(timeElapsed) + "\n<color=" + textColor + ">BEST: " +
-                            FormatTime(bestTime) + "</color>";
-            scoreText.text = "SCORE: " + scoreManager.GetScore().ToString("D5") + "\n<color=" + textColor2 + ">BEST: " +
-                             bestScore.ToString("D5") + "</color>";
+            
         }
         else
         {
@@ -337,6 +330,9 @@ public class GameManager : MonoBehaviour
         continueText.text = textManager.GetText(id, token);
     }
 
+    public GameObject stats;
+    public GameObject statsMask;
+    
     private IEnumerator ResetGameOverLock(float delay)
     {
         var pauseEndTime = Time.realtimeSinceStartup + delay;
@@ -344,7 +340,20 @@ public class GameManager : MonoBehaviour
 
         gameOverLock = false;
 
-        Debug.Log("Reset Game Over Lock");
+        Debug.Log("Game Over");
+        
+        statsMask.SetActive(true);
+        
+        stats.GetComponent<Stats>().showGameOverSummary = true;
+        stats.SetActive(true);
+        
+//        Debug.Log("Reset Game Over Lock");
+
+//        var textColor = beatBestTime ? "#FF0" : "#FFF";
+//        var textColor2 = beatBestScore ? "#FF0" : "#FFF";
+
+        timeText.text = "";//"TIME: " + FormatTime(timeElapsed) + "\n<color=" + textColor + ">BEST: " + FormatTime(bestTime) + "</color>";
+        scoreText.text = "";//"SCORE: " + scoreManager.GetScore().ToString("D5") + "\n<color=" + textColor2 + ">BEST: " + bestScore.ToString("D5") + "</color>";
     }
 
     private void ResetGame()
@@ -375,7 +384,11 @@ public class GameManager : MonoBehaviour
         messageBox.ShowMessage(textManager.GetText("instructions"), 4);
 
         pauseButton.gameObject.SetActive(true);
-
+        
+        statsMask.SetActive(false);
+        stats.SetActive(false);
+        stats.GetComponent<Stats>().showGameOverSummary = false;
+        
         if (pauseButton != null)
             pauseButton.gameObject.SetActive(true);
     }
@@ -470,7 +483,7 @@ public class GameManager : MonoBehaviour
         return bufferValue;
     }
 
-    public void PlayeAction()
+    public void PlayerAction()
     {
         // Test to see if the game is over
         if (!gameStarted && !gameOverLock)

@@ -52,9 +52,9 @@ public class MuteButton : MonoBehaviour
     public void UpdateLabel()
     {
         if (soundManager.mute)
-            label.text = "SOUND ON/<color=#f1af2e>OFF</color>";
+            label.text = "SOUND Y/<color=#f1af2e>N</color>";
         else
-            label.text = "SOUND <color=#f1af2e>ON</color>/OFF";
+            label.text = "SOUND <color=#f1af2e>Y</color>/N";
     }
 
     public void ToggleMute()
