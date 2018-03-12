@@ -340,7 +340,7 @@ public class GameManager : MonoBehaviour
 
         gameOverLock = false;
 
-        Debug.Log("Game Over");
+//        Debug.Log("Game Over");
         
         statsMask.SetActive(true);
         
@@ -485,6 +485,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerAction()
     {
+        
         // Test to see if the game is over
         if (!gameStarted && !gameOverLock)
         {
@@ -494,14 +495,18 @@ public class GameManager : MonoBehaviour
             ResetGame();
         }
         // If game is playing see if we can make the player jump
-        else
+        else 
         {
-            // Look for a player instance
-            if (player != null)
+            if (Time.timeScale == 1)
             {
-                // Call action on the player's jump component
-                player.GetComponent<Jump>().Action();
+                // Look for a player instance
+                if (player != null)
+                {
+                    // Call action on the player's jump component
+                    player.GetComponent<Jump>().Action();
+                }
             }
+            
         }
 
     }

@@ -26,7 +26,11 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         get { return GameObjectUtil.GetSingleton<StatsManager>(); }
     }
-
+    
+    private ScoreManager scoreManager
+    {
+        get { return GameObjectUtil.GetSingleton<ScoreManager>(); }
+    }
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -47,5 +51,6 @@ public class PlayerAnimationManager : MonoBehaviour
     public void PlayFootstep()
     {
         statsManager.UpdateStatValue("StepsTaken", 1);
+        scoreManager.IncreaseScore(1);
     }
 }
