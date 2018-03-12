@@ -54,7 +54,6 @@ public class Stats : MonoBehaviour
     {
         UpdateDisplay();
     }
-//    string color = "#a2a2a2";
 
     private string CalculateRank(string stat, string rankColor = "#a2a2a2", string template = "({0})")
     {
@@ -70,7 +69,7 @@ public class Stats : MonoBehaviour
             rankColor = rank == 1 ? "#ffff00" : "#ffffff";
         }
         
-        return " <color=" + rankColor + ">"+string.Format(template, AddOrdinal(rank))+"</color> ";
+        return " <color=" + rankColor + ">"+string.Format(template, AddOrdinal(rank).ToUpper())+"</color> ";
     }
     
     public string AddOrdinal(int num)

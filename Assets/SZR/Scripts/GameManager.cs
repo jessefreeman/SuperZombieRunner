@@ -268,14 +268,14 @@ public class GameManager : MonoBehaviour
         else
         {
             timeElapsed += Time.deltaTime;
-            timeText.text = "TIME: " + FormatTime(timeElapsed);
+            timeText.text = "TIME\n" + FormatTime(timeElapsed);
 
             scoreBuffer = (int) GetValue(scoreBuffer, scoreManager.GetScore(), 2);
-            scoreText.text = "SCORE: " + scoreBuffer.ToString("D5");
+            scoreText.text = "SCORE\n" + scoreBuffer.ToString("D6");
             var combo = (int) statsManager.GetStatValue("JumpCombo") - 1;
 
             if (combo > 1)
-                scoreText.text += "\nX COMBO: " + combo.ToString("D2");
+                scoreText.text += "\n"+combo.ToString("D2")+"X COMBO";
         }
     }
 
